@@ -1,0 +1,9 @@
+# build output
+build/
+search
+
+# datasets, caches and run outputs
+data/
+cache/
+*.zip
+output*.txt
