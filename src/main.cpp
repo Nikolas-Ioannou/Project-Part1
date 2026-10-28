@@ -1,8 +1,9 @@
 // Entry point of ./search.
-// Current stage (Phase 2):
 //  1. parse the command line, read the split file and check that all images are present
 //  2. build (or load from the cache) the vocabulary and the vectors x_I of the
 //     validation/test HPatches images and of the first D usable MIRFlickr images
+//  3. build the queries and the database of the chosen set (-set), run the chosen method
+//     on every query, write the output file and print a summary
 
 #include <opencv2/core.hpp>
 #include <algorithm>
@@ -12,8 +13,11 @@
 #include <iomanip>
 #include <iostream>
 #include "args.hpp"
+#include "database.hpp"
 #include "dataset.hpp"
+#include "experiment.hpp"
 #include "features.hpp"
+#include "searcher.hpp"
 
 using namespace std;
 
@@ -37,7 +41,7 @@ void printSplitSummary(const vector<Sequence>& seqs) {
 }
 
 // Prints the size of a vector set, the average n_I, and the largest deviation of
-// sum(x_I) from 1 over the images that have descriptors (should be ~1e-7, i.e. only rounding).
+// sum(x_I) from 1 over the images that have descriptors (should be ~1e-7, i.e. only rounding)
 void printVectorStats(const string& name, const VectorSet& vs) {
     size_t valid = 0;
     double descTotal = 0, maxDev = 0;
@@ -97,6 +101,18 @@ int main(int argc, char** argv) {
         cout << "Vocabulary: K = " << fd.vocab.K << " centers in R^128\n";
         printVectorStats("HPatches (validation + test)", fd.hpatches);
         printVectorStats("MIRFlickr (cached prefix)", fd.mirflickr);
+        // Queries and database of the chosen set
+        const SearchData sd = buildSearchData(fd, seqs, parseSplit(args.set), args.D);
+        cout << "\nQuery set: " << args.set << ", " << sd.queries.size() << " queries\n"
+             << "Database: " << sd.db.size() << " images (" << sd.numHPatches << " HPatches + "
+             << sd.numMirflickr << " MIRFlickr)\n";
+        // Search, evaluation and output file
+        auto searcher = makeSearcher(args);
+        const ExperimentResult res = runExperiment(*searcher, methodName(args.method), sd,
+                                                   args.outputFile);
+        cout << "\n" << methodName(args.method) << " results:\n";
+        printSummary(cout, res);
+        cout << "Output written to " << args.outputFile << "\n";
     } catch (const exception& e) {
         cerr << "error: " << e.what() << "\n";
         return 1;

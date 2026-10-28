@@ -76,6 +76,22 @@ Exactly one of the following is required, followed by its optional parameters.
 | `-ivfflat` | `-kclusters` (⌈√n⌉), `-nprobe` (5) |
 | `-ivfpq` | `-kclusters` (⌈√n⌉), `-nprobe` (5), `-M` (16, must divide `-vocab`), `-nbits` (8) |
 
+## Output
+
+The output file follows the format of the assignment: the method name, then for every query
+its 10 results (`Rank-1` .. `Rank-10`), `Recall@5`, `Recall@10` and `AP@10`, and at the end
+`Mean Recall@5`, `Mean Recall@10`, `mAP@10` and `Average query time` (ms). If an approximate
+method returns fewer than 10 results, the missing ranks are written as `-` and count as
+non-relevant.
+
+The query time covers only the search (from x_Q to the 10 results), not feature extraction or
+index construction. The program also prints a summary table for all queries and separately for
+the illumination and viewpoint sequences, with the number of queries that got fewer than 10
+results and the index build time.
+
+Note: 15 MIRFlickr images have no SIFT descriptors, so `-D 25000` uses the 24985 usable images
+(database of 25100 images instead of 25115).
+
 ## Files
 
 | File | Contents |
@@ -89,6 +105,12 @@ Exactly one of the following is required, followed by its optional parameters.
 | `include/bovw.hpp`, `src/bovw.cpp` | vocabulary training (up to S descriptors per training image) and vectors x_I |
 | `include/vector_set.hpp`, `src/vector_set.cpp` | storage of image vectors and their binary cache format |
 | `include/features.hpp`, `src/features.cpp` | builds or loads the vocabulary and all image vectors, with caching |
+| `include/database.hpp`, `src/database.cpp` | queries (I1) and database (I2..I6 + D MIRFlickr) of a query set |
+| `include/searcher.hpp`, `src/searcher.cpp` | common interface of the search methods and creation of the chosen one |
+| `include/exact_search.hpp`, `src/exact_search.cpp` | exact (exhaustive) search |
+| `include/topk.hpp` | keeps the k nearest candidates |
+| `include/metrics.hpp`, `src/metrics.cpp` | Recall@5, Recall@10, AP@10, mAP@10 |
+| `include/experiment.hpp`, `src/experiment.cpp` | query loop, timing, output file, summary table |
 | `include/distance.hpp` | squared Euclidean distance |
 | `include/parallel.hpp` | parallel loop over all CPU cores with `std::thread` |
 | `src/main.cpp` | entry point |
