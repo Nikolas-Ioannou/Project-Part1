@@ -59,6 +59,7 @@ ExperimentResult runExperiment(Searcher& searcher, const string& methodName,
         << "mAP@10: " << res.all.mAP10() << "\n"
         << "Average query time: " << res.all.meanTimeMs() << "\n";
     if (!out) throw runtime_error("error while writing " + outputFile);
+    res.stats = searcher.stats();
     return res;
 }
 
@@ -77,4 +78,5 @@ void printSummary(ostream& os, const ExperimentResult& r) {
     row("viewpoint", r.viewpoint);
     os << "Index build time: " << fixed << setprecision(1) << r.buildMs << " ms\n"
        << defaultfloat;
+    if (!r.stats.empty()) os << r.stats << "\n";
 }

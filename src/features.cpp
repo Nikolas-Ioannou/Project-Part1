@@ -1,4 +1,4 @@
-// Loading / building the vocabulary and the image vectors with caching 
+// Loading / building the vocabulary and the image vectors with caching
 
 #include "features.hpp"
 
@@ -91,7 +91,7 @@ VectorSet loadOrExtendMirflickr(const Args& a, const vector<string>& files,
         cerr << "MIRFlickr vectors: " << vs.size() << " loaded from " << path << "\n";
     else
         vs.dim = a.vocab;
-    // The cache must hold a prefix of the sorted file list; if it does not (e.g. images were
+    // The cache must hold a prefix of the sorted file list. If it does not (e.g. images were
     // added or removed), start again
     for (size_t i = 0; i < vs.size(); ++i)
         if (i >= files.size() || vs.ids[i] != files[i]) {

@@ -18,6 +18,7 @@ struct ExperimentResult {
     MetricsSum illumination;  // only i_* sequences
     MetricsSum viewpoint;     // only v_* sequences
     double buildMs = 0;       // index construction time (not part of the query time)
+    std::string stats;        // method-specific statistics (Searcher::stats)
 };
 
 // Builds the searcher's index over sd.db, runs every query, writes the output file

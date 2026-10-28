@@ -1,8 +1,8 @@
-// VectorSet and its binary file format 
+// VectorSet and its binary file format
 // File layout (native byte order):
 //   char[4] "BVEC", int32 version, int32 dim, uint64 count,
 //   count x { uint32 idLength, char[idLength] id, int32 numDescriptors },
-//   count * dim float32 vector values.
+//   count * dim float32 vector values
 
 #include "vector_set.hpp"
 #include <cstdint>

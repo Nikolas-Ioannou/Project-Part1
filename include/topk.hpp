@@ -44,7 +44,7 @@ public:
     }
 
 private:
-    // (distance, index); pair's operator< compares distance first, then index
+    // (distance, index). Pair's operator< compares distance first, then index
     using Entry = std::pair<float, int>;
     int k_;
     std::vector<Entry> heap_;  // max-heap: the worst kept candidate is at the front

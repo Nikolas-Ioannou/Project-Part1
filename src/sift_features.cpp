@@ -1,4 +1,4 @@
-// SIFT extraction 
+// SIFT extraction
 
 #include "sift_features.hpp"
 

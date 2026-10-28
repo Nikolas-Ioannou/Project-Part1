@@ -1,10 +1,10 @@
 
 // Bag of visual words representation (sections I and III)
 //  1. Vocabulary: up to S random SIFT descriptors are taken from every training image and
-//     k-means on their union gives K centers c_1..c_K in R^128.
-//  2. Image vector: every SIFT descriptor of an image I is assigned to its nearest center;
+//     k-means on their union gives K centers c_1..c_K in R^128
+//  2. Image vector: every SIFT descriptor of an image I is assigned to its nearest center
 //     with h_j descriptors assigned to c_j and n_I descriptors in total,
-//     x_I = (h_1 / n_I, ..., h_K / n_I), so the coordinates are >= 0 and sum to 1.
+//     x_I = (h_1 / n_I, ..., h_K / n_I), so the coordinates are >= 0 and sum to 1
 
 #pragma once
 

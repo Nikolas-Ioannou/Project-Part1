@@ -2,7 +2,7 @@
 // The common options (-hp, -mir, -split, -vocab, -S, -D, -set, -o, -seed) are stored directly in Args
 // Exactly one search method is selected with -exact, -lsh, -hypercube,
 // -ivfflat or -ivfpq, and each method keeps its own optional parameters in a separate
-// struct, initialised with the default values given in the assignment.
+// struct, initialised with the default values given in the assignment
 
 #pragma once
 
@@ -12,7 +12,7 @@
 // Search method selected on the command line. None means no method flag was given
 enum class Method { None, Exact, LSH, Hypercube, IVFFlat, IVFPQ };
 
-// Readable method name, used as <METHOD NAME> in the output file.
+// Readable method name, used as <METHOD NAME> in the output file
 std::string methodName(Method m);
 
 // Parameters of -lsh

@@ -14,3 +14,11 @@ inline float squaredL2(const float* a, const float* b, int d) {
     }
     return s;
 }
+
+// Dot product of two vectors of dimension d (used by the random projections v · x)
+inline float dot(const float* a, const float* b, int d) {
+    float s = 0.f;
+#pragma omp simd reduction(+ : s)
+    for (int i = 0; i < d; ++i) s += a[i] * b[i];
+    return s;
+}

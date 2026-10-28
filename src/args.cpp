@@ -9,7 +9,7 @@ using namespace std;
 namespace {
 
 // Converts the value of an option to int. The whole string must be a number,
-// so "12abc" or "" are rejected instead of being silently read as 12 or 0.
+// so "12abc" or "" are rejected instead of being silently read as 12 or 0
 int toInt(const string& flag, const string& v) {
     size_t pos = 0;  // number of characters consumed by stoi
     int x = 0;
@@ -129,7 +129,7 @@ Args parseArgs(int argc, char** argv) {
 
     // First pass: find the method, since -w, -M, -kclusters, -nprobe are shared
     // between methods and their meaning depends on it. The method flag may appear
-    // anywhere on the command line, even after its own parameters.
+    // anywhere on the command line, even after its own parameters
     for (int i = 1; i < argc; ++i) {
         Method m = methodFromFlag(argv[i]);
         if (m == Method::None) continue;
@@ -142,16 +142,16 @@ Args parseArgs(int argc, char** argv) {
         throw runtime_error(
             "no search method given (-exact, -lsh, -hypercube, -ivfflat or -ivfpq)");
 
-    // Second pass: every other option is a "-name value" pair.
+    // Second pass: every other option is a "-name value" pair
     for (int i = 1; i < argc; ++i) {
         const string f = argv[i];
         if (methodFromFlag(f) != Method::None) continue;  // already handled above
-        // The value must exist and must not be a method flag (e.g. "-k -lsh").
+        // The value must exist and must not be a method flag (e.g. "-k -lsh")
         if (i + 1 >= argc || methodFromFlag(argv[i + 1]) != Method::None)
             throw runtime_error("missing value for " + f);
         const string v = argv[++i];
         const Method m = a.method;
-        // Error for a known option used with the wrong method (e.g. -k with -ivfflat).
+        // Error for a known option used with the wrong method (e.g. -k with -ivfflat)
         auto notFor = [&]() {
             return runtime_error("option " + f + " does not apply to " + methodFlag(m));
         };
@@ -255,7 +255,7 @@ void printArgs(ostream& os, const Args& a) {
        << "vocab=" << a.vocab << " S=" << a.S << " D=" << a.D << " set=" << a.set
        << " seed=" << a.seed << "\n"
        << "Method:     " << methodName(a.method);
-    // kclusters is shown as "auto" while it still holds the ceil(sqrt(n)) placeholder.
+    // kclusters is shown as "auto" while it still holds the ceil(sqrt(n)) placeholder
     auto kc = [](int k) { return k == 0 ? string("auto") : to_string(k); };
     switch (a.method) {
         case Method::LSH:

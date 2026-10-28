@@ -108,6 +108,9 @@ Note: 15 MIRFlickr images have no SIFT descriptors, so `-D 25000` uses the 24985
 | `include/database.hpp`, `src/database.cpp` | queries (I1) and database (I2..I6 + D MIRFlickr) of a query set |
 | `include/searcher.hpp`, `src/searcher.cpp` | common interface of the search methods and creation of the chosen one |
 | `include/exact_search.hpp`, `src/exact_search.cpp` | exact (exhaustive) search |
+| `include/projection.hpp`, `src/projection.cpp` | random projections h(x) = floor((v·x + t) / w) shared by LSH and Hypercube |
+| `include/lsh.hpp`, `src/lsh.cpp` | LSH: L hash tables, each keyed by g = (h_1, ..., h_k) |
+| `include/hypercube.hpp`, `src/hypercube.cpp` | Hypercube: projection to {0,1}^kproj, probing vertices by increasing Hamming distance |
 | `include/topk.hpp` | keeps the k nearest candidates |
 | `include/metrics.hpp`, `src/metrics.cpp` | Recall@5, Recall@10, AP@10, mAP@10 |
 | `include/experiment.hpp`, `src/experiment.cpp` | query loop, timing, output file, summary table |

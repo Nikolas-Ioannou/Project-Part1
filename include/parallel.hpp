@@ -18,7 +18,7 @@ inline unsigned numThreads() {
 }
 
 // Calls f(i) for every i in [0, n) on numThreads() threads. Indices are handed out in
-// blocks of `grain`, so uneven work (e.g. images of different sizes) stays balanced.
+// blocks of `grain`, so uneven work (e.g. images of different sizes) stays balanced
 // f must be safe to call concurrently for different i. Results only depend on i, never on
 // which thread ran it, so the output is the same for any number of threads
 // The first exception thrown by f stops the remaining work and is rethrown here

@@ -19,6 +19,6 @@ struct KMeansResult {
 KMeansResult kmeans(const std::vector<float>& data, size_t n, int dim, int k, unsigned seed,
                     int maxIter = 100, double tol = 1e-3);
 
-// Index of the centroid nearest to x (Euclidean); its squared distance in *sqDist if given
+// Index of the centroid nearest to x (Euclidean). Its squared distance in *sqDist if given
 int nearestCentroid(const float* x, const float* centroids, int k, int dim,
                     float* sqDist = nullptr);

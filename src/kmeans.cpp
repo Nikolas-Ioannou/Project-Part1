@@ -1,4 +1,4 @@
-// Lloyd's k-means with k-means++ initialisation 
+// Lloyd's k-means with k-means++ initialisation
 
 #include "kmeans.hpp"
 
@@ -42,7 +42,7 @@ vector<float> initPlusPlus(const vector<float>& data, size_t n, int dim, int k,
         double total = 0;
         for (size_t i = 0; i < n; ++i) total += minD[i];
         if (total <= 0) {
-            // Every point coincides with a centroid (duplicates); pick any point
+            // Every point coincides with a centroid (duplicates). Pick any point
             chosen = uniform_int_distribution<size_t>(0, n - 1)(rng);
         } else {
             double r = uniform_real_distribution<double>(0, total)(rng);

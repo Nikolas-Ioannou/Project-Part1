@@ -1,4 +1,4 @@
-// Entry point of ./search.
+// Entry point of ./search
 //  1. parse the command line, read the split file and check that all images are present
 //  2. build (or load from the cache) the vocabulary and the vectors x_I of the
 //     validation/test HPatches images and of the first D usable MIRFlickr images
