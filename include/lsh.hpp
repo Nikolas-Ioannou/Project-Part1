@@ -28,14 +28,12 @@ public:
 private:
     // Key of the bucket of x in table l: the k values of g_l(x) mixed into 64 bits
     unsigned long long key(int l, const float* x) const;
-
     LSHParams params_;
     unsigned seed_;
     const VectorSet* db_ = nullptr;
     std::vector<ProjectionFamily> g_;  // one family of k functions per table
     // tables_[l]: bucket key -> indices of the database vectors in that bucket
     std::vector<std::unordered_map<unsigned long long, std::vector<int>>> tables_;
-
     // Statistics over the queries run so far (for the experimental study)
     mutable long long totalCandidates_ = 0;
     mutable long long queries_ = 0;

@@ -122,7 +122,6 @@ VectorSet loadOrExtendMirflickr(const Args& a, const vector<string>& files,
         valid = countValid(vs);
         saveVectorSet(path, vs);
     }
-
     // MIRFlickr-25K has 15 images without any SIFT keypoint, so -D 25000 cannot be met
     // exactly. All usable images are taken instead (24985 for the full set)
     if (valid < D)

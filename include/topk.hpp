@@ -10,7 +10,7 @@
 class TopK {
 public:
     explicit TopK(int k) : k_(k) { heap_.reserve(k); }
-
+    
     // Offers candidate idx at (squared) distance dist. It is kept if it is among the k
     // closest so far. Equal distances are ordered by index, so results are deterministic
     void push(float dist, int idx) {

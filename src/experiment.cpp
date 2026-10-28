@@ -17,7 +17,7 @@ double msSince(Clock::time_point t0) {
     return chrono::duration<double, milli>(Clock::now() - t0).count();
 }
 
-}  // namespace
+}  
 
 ExperimentResult runExperiment(Searcher& searcher, const string& methodName,
                                const SearchData& sd, const string& outputFile) {

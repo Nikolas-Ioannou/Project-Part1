@@ -111,7 +111,7 @@ void validate(const Args& a) {
     }
 }
 
-}  // namespace
+} 
 
 string methodName(Method m) {
     switch (m) {
@@ -126,7 +126,6 @@ string methodName(Method m) {
 
 Args parseArgs(int argc, char** argv) {
     Args a;
-
     // First pass: find the method, since -w, -M, -kclusters, -nprobe are shared
     // between methods and their meaning depends on it. The method flag may appear
     // anywhere on the command line, even after its own parameters
@@ -221,7 +220,6 @@ Args parseArgs(int argc, char** argv) {
         }
         else throw runtime_error("unknown option " + f);
     }
-
     validate(a);
     return a;
 }

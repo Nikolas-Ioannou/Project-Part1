@@ -60,7 +60,6 @@ void saveVectorSet(const string& path, const VectorSet& vs) {
 bool loadVectorSet(const string& path, int expectedDim, VectorSet& vs) {
     ifstream in(path, ios::binary);
     if (!in) return false;
-
     char magic[4];
     int32_t version = 0, dim = 0;
     uint64_t count = 0;
@@ -72,7 +71,6 @@ bool loadVectorSet(const string& path, int expectedDim, VectorSet& vs) {
     // file can hold before allocating memory for them
     const auto fileSize = filesystem::file_size(path);
     if (count > fileSize / (static_cast<uint64_t>(dim) * sizeof(float) + 1)) return false;
-
     VectorSet out;
     out.dim = dim;
     out.ids.resize(count);

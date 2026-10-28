@@ -37,7 +37,6 @@ void Hypercube::build(const VectorSet& db) {
     mt19937 rng(seq);
     h_.clear();
     h_.emplace_back(params_.kproj, db.dim, params_.w, rng);
-
     vertices_.clear();
     for (size_t i = 0; i < db.size(); ++i) vertices_[vertex(db.row(i))].push_back(static_cast<int>(i));
 }
@@ -48,7 +47,6 @@ vector<int> Hypercube::search(const float* q, int k) const {
     TopK top(k);
     int probes = 0;
     int checked = 0;
-
     // Visit vertices at Hamming distance 0, 1, 2, ... from qv. The vertices at distance r
     // are qv XOR mask for every d-bit mask with r bits set. The masks are enumerated in
     // increasing numeric order (Gosper's hack: next larger number with the same bit count)
@@ -71,7 +69,6 @@ vector<int> Hypercube::search(const float* q, int k) const {
             mask = (((nr ^ mask) >> 2) / c) | nr;
         }
     }
-
     totalCandidates_ += checked;
     totalProbes_ += probes;
     ++queries_;

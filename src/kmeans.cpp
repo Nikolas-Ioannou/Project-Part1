@@ -81,14 +81,12 @@ KMeansResult kmeans(const vector<float>& data, size_t n, int dim, int k, unsigne
     if (k < 1 || n < static_cast<size_t>(k))
         throw runtime_error("k-means: need at least k=" + to_string(k) +
                                  " points, got " + to_string(n));
-
     mt19937 rng(seed);
     KMeansResult res;
     res.centroids = initPlusPlus(data, n, dim, k, rng);
     res.assignment.assign(n, -1);
     vector<int> next(n);
     vector<float> dist(n);  // squared distance of each point to its centroid
-
     for (int iter = 1;; ++iter) {
         res.iterations = iter;
         // Assignment step: each point goes to its nearest centroid (in parallel)
@@ -135,7 +133,6 @@ KMeansResult kmeans(const vector<float>& data, size_t n, int dim, int k, unsigne
             res.assignment[far] = c;
             dist[far] = 0;
         }
-
         for (int c = 0; c < k; ++c)
             for (int d = 0; d < dim; ++d)
                 res.centroids[static_cast<size_t>(c) * dim + d] =

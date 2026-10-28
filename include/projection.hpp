@@ -12,10 +12,8 @@ class ProjectionFamily {
 public:
     // count independent functions h_0..h_{count-1} on vectors of dimension dim
     ProjectionFamily(int count, int dim, double w, std::mt19937& rng);
-
     // Writes h_0(x)..h_{count-1}(x) to out (out must hold count values)
     void hash(const float* x, long long* out) const;
-
     int count() const { return count_; }
 
 private:

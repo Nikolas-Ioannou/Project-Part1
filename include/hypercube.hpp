@@ -20,7 +20,6 @@
 class Hypercube : public Searcher {
 public:
     Hypercube(const HypercubeParams& params, unsigned seed);
-
     void build(const VectorSet& db) override;
     std::vector<int> search(const float* q, int k) const override;
     std::string stats() const override;
@@ -28,14 +27,12 @@ public:
 private:
     // Vertex of x: bit i is f_i(h_i(x))
     unsigned vertex(const float* x) const;
-
     HypercubeParams params_;
     unsigned seed_;
     const VectorSet* db_ = nullptr;
     std::vector<ProjectionFamily> h_;  // a single family of kproj functions
     // vertex -> indices of the database vectors on it (only non-empty vertices are stored)
     std::unordered_map<unsigned, std::vector<int>> vertices_;
-
     // Statistics over the queries run so far (for the experimental study)
     mutable long long totalCandidates_ = 0;
     mutable long long totalProbes_ = 0;

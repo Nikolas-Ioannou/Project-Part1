@@ -26,11 +26,9 @@ template <typename F>
 void parallelFor(size_t n, F&& f, size_t grain = 1) {
     if (n == 0) return;
     grain = std::max<size_t>(grain, 1);
-
     std::atomic<size_t> next{0};  // start of the next block to hand out
     std::exception_ptr error;
     std::mutex errorMutex;
-
     auto worker = [&]() {
         for (;;) {
             const size_t begin = next.fetch_add(grain);
