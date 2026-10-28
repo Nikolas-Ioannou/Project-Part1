@@ -22,3 +22,12 @@ KMeansResult kmeans(const std::vector<float>& data, size_t n, int dim, int k, un
 // Index of the centroid nearest to x (Euclidean). Its squared distance in *sqDist if given
 int nearestCentroid(const float* x, const float* centroids, int k, int dim,
                     float* sqDist = nullptr);
+
+// Indices of the `count` centroids nearest to x, closest first (count is capped at k)
+// Used by IVFFlat / IVFPQ to choose the nprobe clusters to search
+std::vector<int> nearestCentroids(const float* x, const float* centroids, int k, int dim,
+                                  int count);
+
+// Seed for one separate random step, derived from the -seed value and a fixed salt per
+// step, so the steps do not share random numbers but all depend only on -seed
+unsigned deriveSeed(unsigned seed, unsigned salt);

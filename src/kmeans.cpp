@@ -76,6 +76,26 @@ int nearestCentroid(const float* x, const float* centroids, int k, int dim, floa
     return best;
 }
 
+vector<int> nearestCentroids(const float* x, const float* centroids, int k, int dim,
+                             int count) {
+    // (distance, index) pairs, so ties are ordered by index
+    vector<pair<float, int>> d(k);
+    for (int j = 0; j < k; ++j)
+        d[j] = {squaredL2(x, centroids + static_cast<size_t>(j) * dim, dim), j};
+    count = min(count, k);
+    partial_sort(d.begin(), d.begin() + count, d.end());
+    vector<int> out(count);
+    for (int i = 0; i < count; ++i) out[i] = d[i].second;
+    return out;
+}
+
+unsigned deriveSeed(unsigned seed, unsigned salt) {
+    seed_seq seq{seed, salt};
+    unsigned out[1];
+    seq.generate(out, out + 1);
+    return out[0];
+}
+
 KMeansResult kmeans(const vector<float>& data, size_t n, int dim, int k, unsigned seed,
                     int maxIter, double tol) {
     if (k < 1 || n < static_cast<size_t>(k))

@@ -111,6 +111,8 @@ Note: 15 MIRFlickr images have no SIFT descriptors, so `-D 25000` uses the 24985
 | `include/projection.hpp`, `src/projection.cpp` | random projections h(x) = floor((v·x + t) / w) shared by LSH and Hypercube |
 | `include/lsh.hpp`, `src/lsh.cpp` | LSH: L hash tables, each keyed by g = (h_1, ..., h_k) |
 | `include/hypercube.hpp`, `src/hypercube.cpp` | Hypercube: projection to {0,1}^kproj, probing vertices by increasing Hamming distance |
+| `include/ivf_flat.hpp`, `src/ivf_flat.cpp` | IVFFlat: k-means on the database vectors, exact search in the nprobe nearest lists |
+| `include/ivf_pq.hpp`, `src/ivf_pq.cpp` | IVFPQ: IVF lists with Product Quantization codes of the residuals, asymmetric distance tables |
 | `include/topk.hpp` | keeps the k nearest candidates |
 | `include/metrics.hpp`, `src/metrics.cpp` | Recall@5, Recall@10, AP@10, mAP@10 |
 | `include/experiment.hpp`, `src/experiment.cpp` | query loop, timing, output file, summary table |
