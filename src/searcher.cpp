@@ -13,7 +13,7 @@ unique_ptr<Searcher> makeSearcher(const Args& args) {
         case Method::Exact:
             return make_unique<ExactSearch>();
         default:
-            // The approximate methods are added in phases 4 and 5
+            // Methods without an implementation yet
             throw runtime_error(methodName(args.method) + " is not implemented yet");
     }
 }
