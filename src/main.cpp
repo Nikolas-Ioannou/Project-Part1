@@ -37,7 +37,7 @@ void printSplitSummary(const vector<Sequence>& seqs) {
 }
 
 // Prints the size of a vector set, the average n_I, and the largest deviation of
-// sum(x_I) from 1 over the images that have descriptors (should be ~1e-6, i.e. rounding).
+// sum(x_I) from 1 over the images that have descriptors (should be ~1e-7, i.e. only rounding).
 void printVectorStats(const string& name, const VectorSet& vs) {
     size_t valid = 0;
     double descTotal = 0, maxDev = 0;

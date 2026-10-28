@@ -64,11 +64,11 @@ struct Args {
     IVFPQParams ivfpq;
 };
 
-// Parses and validates the command lin
-// Message on bad input 
+// Parses and validates the command line. Throws std::runtime_error with a readable
+// message on bad input
 Args parseArgs(int argc, char** argv);
 
-// Helps text listing every option and its default
+// Help text listing every option and its default
 std::string usage(const char* prog);
 
 // Prints the parsed options, so each run records the parameters it used
