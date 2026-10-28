@@ -55,6 +55,14 @@ make clean
 | `-D <int>` | number of MIRFlickr distractor images | 1000 |
 | `-set <validation\|test>` | query set | validation |
 | `-seed <int>` | random seed | 1 |
+| `-cache <dir>` | directory for the cached vocabulary and image vectors (extra option) | `cache` |
+
+### Cache
+
+SIFT extraction is the slowest step, so the vocabulary and the image vectors are saved in
+`-cache` and reused by later runs. File names contain K, S, the seed and a hash of the split
+file, so changing any of them builds a new cache. The MIRFlickr cache grows as needed: a run
+with a larger `-D` only processes the extra images. Delete the directory to rebuild everything.
 
 ### Methods
 
@@ -76,4 +84,11 @@ Exactly one of the following is required, followed by its optional parameters.
 | `split.txt` | HPatches train/validation/test split |
 | `include/args.hpp`, `src/args.cpp` | command-line parsing and validation |
 | `include/dataset.hpp`, `src/dataset.cpp` | split file reader, HPatches and MIRFlickr file listing |
+| `include/sift_features.hpp`, `src/sift_features.cpp` | SIFT descriptor extraction with OpenCV |
+| `include/kmeans.hpp`, `src/kmeans.cpp` | own k-means (k-means++ initialisation, Lloyd iterations) |
+| `include/bovw.hpp`, `src/bovw.cpp` | vocabulary training (up to S descriptors per training image) and vectors x_I |
+| `include/vector_set.hpp`, `src/vector_set.cpp` | storage of image vectors and their binary cache format |
+| `include/features.hpp`, `src/features.cpp` | builds or loads the vocabulary and all image vectors, with caching |
+| `include/distance.hpp` | squared Euclidean distance |
+| `include/parallel.hpp` | parallel loop over all CPU cores with `std::thread` |
 | `src/main.cpp` | entry point |
